@@ -33,3 +33,10 @@
    1. [Storage](https://developer.confluent.io/learn/kafka-storage-and-processing/)
    1. [Performance](https://developer.confluent.io/learn/kafka-performance/)
    1. [Testing](https://developer.confluent.io/learn/testing-kafka/)
+
+## Issues
+
+* `confluent-kafka` - No prebuilt wheels for 3.10+
+  * https://github.com/confluentinc/confluent-kafka-python/issues/1219
+  * https://github.com/confluentinc/confluent-kafka-python/blob/master/INSTALL.md
+* `confluent-kafka` - pylint error: Unable to import `confluent_kafka`
