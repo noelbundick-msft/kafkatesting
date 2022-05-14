@@ -33,7 +33,8 @@
 	"extensions": [
 		"ms-python.python",
 		"ms-python.vscode-pylance",
-		"jeppeandersen.vscode-kafka"
+		"jeppeandersen.vscode-kafka",
+		"ms-azuretools.vscode-bicep"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -43,6 +44,7 @@
 	"remoteUser": "vscode",
 	"features": {
 		"docker-in-docker": "latest",
-		"java": "lts"
+		"java": "lts",
+		"azure-cli": "latest"
 	}
 }

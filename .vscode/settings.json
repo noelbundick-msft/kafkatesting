@@ -4,6 +4,12 @@
   "python.envFile": "${workspaceFolder}/.vscode/python.env",
   "[python]": {
     "editor.formatOnPaste": false,
-    "editor.formatOnSaveMode": "file"
-  }
+    "editor.formatOnSaveMode": "file",
+    "editor.tabSize": 4
+  },
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": true,
+  "terminal.integrated.env.linux": {
+    "PYTHONPATH": "src"
+  },
 }

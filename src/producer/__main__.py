@@ -1,8 +1,8 @@
 from confluent_kafka import Producer, KafkaException, KafkaError
 from confluent_kafka.admin import AdminClient, NewTopic
+import util
 
-
-a = AdminClient({"bootstrap.servers": "127.0.0.1:29092"})
+a = AdminClient(util.base_config())
 fs = a.create_topics(
     [
         NewTopic(
@@ -26,14 +26,7 @@ for topic, f in fs.items():
             raise e
 
 
-p = Producer(
-    {
-        "bootstrap.servers": "127.0.0.1:29092",
-        "enable.idempotence": True,
-        "acks": "all",
-        # "batch.num.messages": 1,
-    }
-)
+p = Producer(util.producer_config())
 
 
 def delivery_report(err, msg):

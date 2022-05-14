@@ -1,3 +1,9 @@
--r ./asyncio/requirements.txt
--r ./consumer/requirements.txt
--r ./producer/requirements.txt
+confluent-kafka
+
+# util
+python-dotenv
+
+# asyncio
+fastapi
+uvicorn
+

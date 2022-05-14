@@ -1,15 +1,10 @@
 import signal
 import sys
 from confluent_kafka import Consumer
+import util
 
 topic = "mytopic"
-c = Consumer(
-    {
-        "bootstrap.servers": "localhost:29092",
-        "group.id": "mygroup",
-        "auto.offset.reset": "earliest",
-    }
-)
+c = Consumer(util.consumer_config())
 
 
 def signal_handler(sig, frame):
