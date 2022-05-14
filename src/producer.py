@@ -1,6 +1,6 @@
 from confluent_kafka import Producer, KafkaException, KafkaError
 from confluent_kafka.admin import AdminClient, NewTopic
-import config as config
+import config
 
 a = AdminClient(config.base_config())
 fs = a.create_topics(
