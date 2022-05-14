@@ -34,6 +34,6 @@ def producer_config():
 def consumer_config():
     return base_config() | {
         "group.id": uuid.uuid1(),
+        "auto.offset.reset": "earliest",
         "session.timeout.ms": 6000,
-        "default.topic.config": {"auto.offset.reset": "earliest"},
     }
