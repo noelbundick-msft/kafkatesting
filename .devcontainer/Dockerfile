@@ -30,3 +30,4 @@ RUN curl -LO http://packages.confluent.io/archive/7.1/confluent-community-7.1.1.
 
 USER vscode
 
+RUN echo "export PIPENV_VENV_IN_PROJECT=1" >> /home/vscode/.bashrc

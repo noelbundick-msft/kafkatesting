@@ -40,3 +40,26 @@
   * https://github.com/confluentinc/confluent-kafka-python/issues/1219
   * https://github.com/confluentinc/confluent-kafka-python/blob/master/INSTALL.md
 * `confluent-kafka` - pylint error: Unable to import `confluent_kafka`
+
+## Hacks
+
+```shell
+# Repo is automatically installed in editable mode with dev dependencies
+# run commands with native executable names
+# defined in [console_scripts] section of setup.cfg
+producer
+
+# build a package
+python -m build
+
+# install the new one in a new virtual environment
+PACKAGE="$(pwd)/$(ls dist/*.whl)"
+pushd $(mktemp -d)
+python -m venv .venv
+source .venv/bin/activate
+which python # make sure we're under /tmp/tmp.*******
+python -m pip install $PACKAGE      # note that all the dependencies (confluent-kafka, fastapi, etc) are pulled in, but the dev dependencies (pytest, pylint) are not
+
+# enjoy your commands!
+producer
+```
