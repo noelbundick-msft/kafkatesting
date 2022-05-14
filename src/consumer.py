@@ -1,10 +1,10 @@
 import signal
 import sys
 from confluent_kafka import Consumer
-import util
+import config
 
 topic = "mytopic"
-c = Consumer(util.consumer_config())
+c = Consumer(config.consumer_config())
 
 
 def signal_handler(sig, frame):
