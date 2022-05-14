@@ -7,3 +7,5 @@ python-dotenv
 fastapi
 uvicorn
 
+# dev tools
+pylint
