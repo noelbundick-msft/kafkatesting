@@ -4,8 +4,8 @@ from . import config
 
 
 def main():
-    a = AdminClient(config.base_config())
-    fs = a.create_topics(
+    admin_client = AdminClient(config.base_config())
+    futures = admin_client.create_topics(
         [
             NewTopic(
                 "mytopic",
@@ -17,17 +17,17 @@ def main():
     )
 
     # Wait for each operation to finish.
-    for topic, f in fs.items():
+    for topic, future in futures.items():
         try:
-            f.result()  # The result itself is None
+            future.result()  # The result itself is None
             print(f"Topic {topic} created")
-        except KafkaException as e:
-            # print(f"Failed to create topic {topic}: {e}")
-            error = e.args[0]
+        except KafkaException as err:
+            # print(f"Failed to create topic {topic}: {err}")
+            error = err.args[0]
             if error.code() != KafkaError.TOPIC_ALREADY_EXISTS:
-                raise e
+                raise err
 
-    p = Producer(config.producer_config())
+    producer = Producer(config.producer_config())
 
     def delivery_report(err, msg):
         """Called once for each message produced to indicate delivery result.
@@ -40,13 +40,13 @@ def main():
     some_data_source = [str(i) for i in range(1000)]
     for data in some_data_source:
         # Trigger any available delivery report callbacks from previous produce() calls
-        p.poll(0)
+        producer.poll(0)
 
         # Asynchronously produce a message, the delivery report callback
         # will be triggered from poll() above, or flush() below, when the message has
         # been successfully delivered or failed permanently.
-        p.produce("mytopic", data.encode("utf-8"), callback=delivery_report)
+        producer.produce("mytopic", data.encode("utf-8"), callback=delivery_report)
 
     # Wait for any outstanding messages to be delivered and delivery report
     # callbacks to be triggered.
-    p.flush()
+    producer.flush()

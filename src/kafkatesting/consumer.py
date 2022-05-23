@@ -6,20 +6,20 @@ from . import config
 
 def main():
     topic = "mytopic"
-    c = Consumer(config.consumer_config())
+    consumer = Consumer(config.consumer_config())
 
     def signal_handler(sig, frame):
         print("exiting")
-        c.close()
+        consumer.close()
         sys.exit(0)
 
     signal.signal(signal.SIGINT, signal_handler)
 
-    c.subscribe([topic])
+    consumer.subscribe([topic])
     print(f"subscribed to {topic}")
 
     while True:
-        msg = c.poll(1.0)
+        msg = consumer.poll(1.0)
 
         if msg is None:
             continue
